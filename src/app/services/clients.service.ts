@@ -1,7 +1,7 @@
-import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { map } from 'rxjs/operators';
 
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Observable  } from 'rxjs';
+import { map } from 'rxjs/operators'; 
 import { Client } from './../models/client';
 import { Injectable } from '@angular/core';
 
@@ -9,21 +9,43 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ClientsService {
-  endPoint:'clients';
-  clientsCollection:AngularFirestoreCollection<Client>;
-  clientDoc:AngularFirestoreDocument<Client>;
+  endPoint='/clients';
+   clients:Observable<Client[]>;
+   clientDoc:AngularFirestoreDocument<Client>;
+   clientsRef:AngularFirestoreCollection<Client>;
   constructor(private fs:AngularFirestore) {
-    this.clientsCollection=this.fs.collection(this.endPoint);
-  }
+    this.clientsRef=this.fs.collection(this.endPoint);
+    this.clients = this.clientsRef.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Client;
+        const id = a.payload.doc.id;
+        console.log('id :'+id);
+        return { id, ...data };
+      }))
+    );
+   }
+
  
-  findAllClient():Observable<Client[]>{
-    return  this.clientsCollection.snapshotChanges()
-      .pipe(
-        map(actions => actions.map(a => a.payload.doc.data()))
-      );
+  findAllClient(){
+    return this.clients;
   }
 
+  /*
+  add Client
+  */
+  createClient(client:Client):Promise<Client>{
+    return this.clientsRef.add(client);
+  }
 
+  updateClient(client:Client){
+    this.clientDoc=this.clientsRef.doc<Client>(client.id);
+    return this.clientDoc.update(client);
+  }
+
+  deleteClient(client:Client):Promise<any>{
+    this.clientDoc=this.clientsRef.doc<Client>(client.id);
+    return this.clientDoc.delete();
+  }
 
 }
 

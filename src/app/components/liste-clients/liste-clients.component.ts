@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/client';
 
+
 @Component({
   selector: 'app-liste-clients',
   templateUrl: './liste-clients.component.html',
@@ -16,11 +17,18 @@ export class ListeClientsComponent implements OnInit {
   ngOnInit(): void {
     this.clientsService.findAllClient().subscribe(data=>{
       this.clients=data;
-      console.log(this.clients);
     },error=>{
-      console.log(error,'Failed to download data please try again');
-    })
-   
+      console.log(error,'Failed to download data !');
+    })   
   }
+
   
+  onDeleteClient(client:Client){
+    const con=confirm('êtes-vous sur de vouloir supprimer le client :' +client.id);
+    if(con){
+      this.clientsService.deleteClient(client).then(_=>console.log('Client deleted successfully !'))
+      .catch(error=>console.log(error,'Failed to delete this client'));   
+    }
+     
+  }
 }
