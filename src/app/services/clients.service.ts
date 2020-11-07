@@ -19,7 +19,6 @@ export class ClientsService {
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Client;
         const id = a.payload.doc.id;
-        console.log('id :'+id);
         return { id, ...data };
       }))
     );
@@ -45,6 +44,10 @@ export class ClientsService {
   deleteClient(client:Client):Promise<any>{
     this.clientDoc=this.clientsRef.doc<Client>(client.id);
     return this.clientDoc.delete();
+  }
+
+  findOneClient(id:string):Observable<Client>{
+    return this.clientsRef.doc(id).valueChanges();
   }
 
 }

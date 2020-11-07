@@ -1,3 +1,4 @@
+import { ListeClientsComponent } from './components/liste-clients/liste-clients.component';
 import { ErrorComponent } from './components/error/error.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AboutComponent } from './components/about/about.component';
@@ -14,6 +15,9 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {path:'',
    component:HomeComponent
+  },
+  {path:'clients',
+   component:ListeClientsComponent
   },
   {
     path:'login',

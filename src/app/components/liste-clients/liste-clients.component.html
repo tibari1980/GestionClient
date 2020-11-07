@@ -11,13 +11,26 @@
     <mat-icon>assistant</mat-icon>
   </button>
  </mat-toolbar>
-<div *ngIf="clients?.length>0">
-<h3>Liste des clients :</h3>
-<table class="table table-striped table-dark table-responsive">
+<div *ngIf="clients?.length>0" >
+<div class="row">
+    <div class="offset-7 col-3">
+        <h4 class="text-right">Total:&nbsp;&nbsp; 
+        <ng-container *ngIf="totalBalance>0; then thenTemplate; else elseTemplate"></ng-container>
+        <ng-template #thenTemplate>
+           {{totalBalance | currency : 'EUR':'symbol'}}
+        </ng-template>
+        <ng-template #elseTemplate>
+            #######
+        </ng-template>
+       </h4>
+    </div>
+
+</div>
+<table class="table table-striped table-dark table-responsive spacerRow">
     <thead class="thead-inverse">
         <tr>
             <th>
-                <a routerLink='client/add'>
+                 <a [routerLink]="[ '/client/add']">
                     <i class="fa fa-plus-circle styleFa"  aria-hidden="true"></i>
                 </a>
             </th>
@@ -32,10 +45,10 @@
         </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let client of clients">
+            <tr *ngFor="let client of clients" (dblclick)="onDeleteClient(client)">
                 <td>
-                    <a [routerLink]="[ 'client/edit', client.id]">
-                        <i class="fa fa-edit styleFa "></i>
+                    <a routerLink="client/edit/{{client.id}}">
+                        <i class="fa fa-edit styleFa"></i>
                     </a>
                 </td>
                 <td scope="row">{{client.lastName}}</td>
@@ -44,9 +57,9 @@
                 <td>{{client.dateOfBird}}</td>
                 <td>{{client.phone}}</td>
                 <td>{{client.email}}</td>
-                <td>{{client.balance}}</td>
+                <td>{{client.Balance | currency:'EUR':'symbol'}}</td>
                 <td>
-                    <a [routerLink]="[ '/client/show', client.id]" >
+                    <a routerLink="/client/show/{{client.id}}" >
                       <i class="fa fa-eye styleFa" aria-hidden="true"></i>
                     </a>
                 </td>

@@ -5,3 +5,14 @@
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.spacerRow{
+    margin-top: 10px;
+}
+
+.form-control.ng-invalid.ng-touched{
+    border: 2px solid red;
+}
+.form-control.ng-valid.ng-untouched{
+    border: 2px solid green;
+}

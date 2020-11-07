@@ -1,1 +1,160 @@
-<p>edit-clients works!</p>
+<mat-toolbar color='primary'>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+     <mat-icon>menu</mat-icon>
+   </button>
+   <span>Modifié un client :</span>
+   <span class="example-spacer"></span>
+   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+     <mat-icon>favorite</mat-icon>
+   </button>
+   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>assistant</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="row">
+  <div class="offset-6 col-3">
+      <h4 class="text-center">
+        <a routerLink="/clients">
+          <i class="fa fa-arrow-circle-left">retour liste clients</i>
+        </a>
+      </h4>
+  </div>
+</div>
+<div class="row">
+   <div class="offset-4 col-6">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title"><i class="fa fa-user-circle" aria-hidden="true"></i> Modifié client : </h4>
+          <form  #formClient="ngForm" (ngSubmit)="onUpdateClient()">
+            <div class="form-group">
+              <label for="firstName">Nom :</label>
+              <input type="text" 
+                     class="form-control" 
+                     #firstName="ngModel"
+                     name="firstName" 
+                     id="firstName" 
+                     placeholder="votre nom"
+                     pattern="^[a-zA-Z]*$"
+                     minlength="4"
+                     maxlength="30"
+                     required
+                     [(ngModel)]="clientModule.firstName">
+                     <div class="alert alert-danger" *ngIf="!firstName.valid && firstName.touched">
+                        <div *ngIf="firstName.errors.required">Ce champs est obligatoire</div>
+                        <div *ngIf="firstName.errors.minlength">Ce champs doit contenir {{firstName.errors.minlength.requiredLength}} | vous avez saisi {{firstName.errors.minlength.actualLength}}</div>
+                        <div *ngIf="firstName.errors.pattern">Ce champs doit être alphabétique</div>
+                         </div>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Prénom :</label>
+              <input type="text" 
+                     class="form-control" 
+                     name="lastName"
+                     required
+                     pattern="^[a-zA-Z]*$"
+                     minlength="4"
+                     maxlength="30"
+                     #lastName="ngModel"
+                     [(ngModel)]="clientModule.lastName" 
+                     id="lastName" 
+                     placeholder="votre prénom">
+                     <div class="alert alert-danger" *ngIf="!lastName.valid && lastName.touched">
+                       <div *ngIf="lastName.errors.required">Ce champs est obligatoire</div>
+                       <div *ngIf="lastName.errors.minlength">prénom doit contenir au moins :{{lastName.errors.minlength.requiredLength}} | vous avez saisi {{lastName.errors.minlength.actualLength}}</div>
+                       <div *ngIf="lastName.errors.pattern"> Ce champs doit être alphabétique</div>
+
+                     </div>
+            </div>
+            <div class="form-group">
+              <label for="adresse">Adresse :</label>
+              <input type="text" 
+                     class="form-control" 
+                     name="adresse" 
+                     id="adresse" placeholder="votre adresse postale"
+                     #adresse="ngModel"
+                     required
+                     minlength="10"
+                     maxlength="200"
+                     pattern="^[a-zA-Z0-9_ ]*$"
+                     [(ngModel)]="clientModule.adresse">
+                     <div class="alert aler-danger" *ngIf="!adresse.valid && adresse.touched">
+                        <div class="alert alert-danger" *ngIf="adresse.errors.required">Ce champs est obligatoire.</div>
+                        
+                        <div class="alert alert-danger" *ngIf="adresse.errors.minlength">Ce champs doit contenir au moins : {{adresse.errors.minlength.requiredLength}} | vous avez sais :{{adresse.errors.minlength.actualLength}}</div>
+                        <div class="alert alert-danger" *ngIf="adresse.errors.pattern">Ce champ ne doit pas contenir les caractères spéciaux.</div>
+                      </div>
+                     
+            </div>
+            <div class="form-group">
+              <label for="email">Email :</label>
+              <input type="email" 
+                     class="form-control" 
+                     name="email"
+                     #email="ngModel" 
+                     id="email" placeholder="votre email"
+                     pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                     [(ngModel)]="clientModule.email"
+                     required>
+                     <div class="alert alert-danger" *ngIf="!email.valid && email.touched">
+                       <div *ngIf="email.errors.required">Ce champs est obligatoire..</div>
+                       <div *ngIf="email.pattern">Ce champs doit contenir un email valide.</div>
+                     </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Téléphone :</label>
+              <input type="tel" 
+                     class="form-control" 
+                     name="phone" 
+                     id="phone" 
+                     placeholder="votre télphone ex : 0625491640"
+                     [(ngModel)]="clientModule.phone"
+                     #phone="ngModel"
+                     required
+                     pattern="^0[6-7]{1}\d{8}$">
+                     <div class="alert alert-danger" *ngIf="!phone.valid && phone.touched">
+                          <div *ngIf="phone.errors.required">Ce champs est obligatoire.</div>
+                          <div *ngIf="phone.errors.pattern">Ce champs doit contenir un numéro valide ex :06 OU 07</div>
+                     </div>
+            </div>
+            <div class="form-group">
+              <label for="dateOfBird">Date de Naissance :</label>
+              <input type="date" 
+                     class="form-control" 
+                     name="dateOfBird" id="dateOfBird"  
+                     placeholder="date de naissance"
+                     #dateOfBird="ngModel"
+                     required
+                     [(ngModel)]="clientModule.dateOfBird">
+                     <div class="alert alert-danger" *ngIf="!dateOfBird.valid && dateOfBird.touched">
+                       <div class="alert alert-danger" *ngIf="dateOfBird.errors.required">Ce champs est obligatoire.</div>
+                     </div>
+            </div>
+            <div class="form-group">
+              <label for="Balance">Balance :</label>
+              <input type="number" class="form-control" 
+                     name="Balance" id="Balance" 
+                     placeholder="montant...."
+                     maxlength="4"
+                     [(ngModel)]="clientModule.Balance"
+                     #Balance="ngModel"
+                     required
+                     pattern="^[0-9]{1,4}$">
+                     <div class="alert alert-danger" *ngIf="!Balance.valid && Balance.touched">
+                       <div *ngIf="Balance.errors.required">Ce champs est obligatoire</div>
+                       <div *ngIf="Balance.errors.pattern">Ce champs doit être numérique et ne dépasse passe 5 chiffres.</div>
+                       <div></div>
+                     </div>
+            </div>
+            <div class="form-group">
+              <button
+                 [disabled]="formClient.form.invalid" 
+                 type="submit" class="btn btn-primary btn-block">
+                <i class="fa fa-database" aria-hidden="true"></i>
+                Save</button>
+            </div>
+            </form>
+          </div>
+        </div>
+   </div>
+
+</div>
