@@ -26,7 +26,8 @@
                Supprimé
             </button>
             &nbsp;&nbsp;
-            <button class="btn btn-primary btn-sm" routerLink="/client/edit/{{client.id}}">
+            <button class="btn btn-primary btn-sm" 
+                [routerLink]="['/client/edit', client.id]">
                 <i class="fa fa-pencil"></i>Modifié
             </button>
         </div>
