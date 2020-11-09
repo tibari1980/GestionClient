@@ -21,8 +21,10 @@ export class ShowClientsComponent implements OnInit {
   ngOnInit(): void {
     this.currentId = this.route.snapshot.params.id;
     this.clientServie.findOneClient(this.currentId).subscribe(data => {
+      
       this.client = data;
-      console.log(this.client);
+      this.client.id=this.currentId;
+      
 
     }, error => {
       console.log(error);
