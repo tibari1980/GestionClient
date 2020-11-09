@@ -29,8 +29,9 @@ export class RegisterComponent implements OnInit {
      }
    })
    .catch((error)=>{
-       this.flashMessage.show(error.message,{cssClass:'alert-danger',timeout:5000});
+       this.flashMessage.show("l'adresse email est déjà utilisée",{cssClass:'alert-danger',timeout:5000});
        this.route.navigate(['/register']);
+       console.log(error.message);
    })
   }
 }

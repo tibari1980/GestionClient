@@ -54,7 +54,8 @@ export class LoginComponent implements OnInit {
        }
     })
     .catch(error=>{
-      this.flashMessage.show(error.message,{cssClass:'alert-danger',timeout:10000});
+      this.flashMessage.show("L'adresse email n'existe pas dans notre base,ou l'adresse à été supprimé !!!",{cssClass:'alert-danger',timeout:10000});
+      console.log(error.message);
       this.route.navigate(['login']);
     })
   }
