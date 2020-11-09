@@ -1,5 +1,7 @@
+
+
 import { MaterialModule } from './material/material.module';
-import { environment } from './../environments/environment';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
@@ -20,7 +22,14 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFirestoreModule, AngularFirestoreDocument } from 'angularfire2/firestore';
+import {AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from './../environments/environment';
+// Firebase services + enviorment module
+//import { AngularFireModule } from "@angular/fire";
+//import { AngularFireAuthModule } from "@angular/fire/auth";
+//import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 @NgModule({
@@ -48,7 +57,9 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

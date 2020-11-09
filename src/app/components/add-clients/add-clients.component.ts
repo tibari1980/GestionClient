@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { ClientsService } from './../../services/clients.service';
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/models/client';
@@ -10,13 +11,23 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class AddClientsComponent implements OnInit {
   clientModule:Client={}
-  constructor(private clientService:ClientsService,private route:Router,private flashMessage:FlashMessagesService) { }
+  constructor(private clientService:ClientsService,
+              private authService:AuthService,
+             private route:Router,private flashMessage:FlashMessagesService) { }
 
   ngOnInit(): void {
+   this.authService.getAuth().subscribe(user=>{
+     //récupération de l'utilisateur authentifié 
+    this.clientModule.user= user.uid;
+   },error=>{
+     console.log(error);
+   })
   }
  
+  /*
+   Ajouté un client
+  */
   onSaveClient(){
-    console.log('ok'+this.clientModule);
     this.clientService.createClient(this.clientModule).then(_=>{
       console.log('Client Created successfully');
     }).catch(error=>console.log('Failed to create client'));

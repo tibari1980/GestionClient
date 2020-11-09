@@ -9,4 +9,5 @@ export interface Client {
     dateOfBird?:Date;
     email?:string;
     Balance?:number;
+    user?:string;
 }

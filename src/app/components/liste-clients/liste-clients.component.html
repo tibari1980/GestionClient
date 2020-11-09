@@ -2,7 +2,11 @@
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
      <mat-icon>menu</mat-icon>
    </button>
-   <span>liste clients : </span>
+   <span>liste clients :  
+    <a *ngIf="clients?.length==0"  
+    [routerLink]="[ '/client/add']">
+    <i class="fa fa-plus-circle styleFa"  aria-hidden="true"></i>
+    </a></span>
    <span class="example-spacer"></span>
    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
      <mat-icon>favorite</mat-icon>
@@ -11,6 +15,11 @@
     <mat-icon>assistant</mat-icon>
   </button>
  </mat-toolbar>
+ <div class="form-group">
+   <label for="">chercher</label>
+   <input type="text"
+     class="form-control" #query (keyup)="chercher(query.value)" name="query" id="query" aria-describedby="helpId" placeholder="Veuillez saisir un mot .....">
+ </div>
 <div *ngIf="clients?.length>0" >
 <div class="row">
     <div class="offset-7 col-3">
@@ -45,7 +54,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let client of clients" (dblclick)="onDeleteClient(client)">
+            <tr *ngFor="let client of SearchClient" (dblclick)="onDeleteClient(client)">
                 <td>
                     <a routerLink="client/edit/{{client.id}}">
                         <i class="fa fa-edit styleFa"></i>

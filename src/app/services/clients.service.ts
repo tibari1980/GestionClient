@@ -23,11 +23,26 @@ export class ClientsService {
       }))
     );
    }
-
  
-  findAllClient(){
-    return this.clients;
+  getAllClient(userId:string):Observable<Client[]>{
+   return this.fs.collection(this.endPoint,ref=>ref.where('user','==',userId)).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Client;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
   }
+ 
+  findAllClient(id:string){
+    return this.fs.collection(this.endPoint,ref=>ref.where('user','==',id)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Client;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    }
 
   /*
   add Client

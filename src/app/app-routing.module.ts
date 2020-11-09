@@ -1,3 +1,4 @@
+import { AuthGuardGuard } from './guards/auth-guard.guard';
 import { ListeClientsComponent } from './components/liste-clients/liste-clients.component';
 import { ErrorComponent } from './components/error/error.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -14,10 +15,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {path:'',
-   component:HomeComponent
+   component:HomeComponent,
+   canActivate:[AuthGuardGuard]
   },
   {path:'clients',
-   component:ListeClientsComponent
+   component:ListeClientsComponent,
+   canActivate:[AuthGuardGuard]
   },
   {
     path:'login',
@@ -29,15 +32,18 @@ const routes: Routes = [
   },
   {
     path:'client/add',
-    component:AddClientsComponent
+    component:AddClientsComponent,
+    canActivate:[AuthGuardGuard]
   },
   {
     path:'client/edit/:id',
-    component:EditClientsComponent
+    component:EditClientsComponent,
+    canActivate:[AuthGuardGuard]
   },
   {
     path:'client/show/:id',
-    component:ShowClientsComponent
+    component:ShowClientsComponent,
+    canActivate:[AuthGuardGuard]
   },
   {
     path:'settings',
