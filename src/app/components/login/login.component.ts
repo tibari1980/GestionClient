@@ -2,6 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  password:string=null;
-  email:string=null;
+  passwordModule:string=null;
+  emailModule:string=null;
   constructor(private flashMessage:FlashMessagesService,
               private route:Router,
               public serviceAuth:AuthService) {
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
     })
   }
   onSeConnecte(){
-   this.serviceAuth.singIn(this.email,this.password)
+   this.serviceAuth.singIn(this.emailModule,this.passwordModule)
    .then(user=>{
       if(user){
         this.flashMessage.show('Vous êtes connecté avec success',{cssClass:'alert-success',timeout:5000})
@@ -38,8 +39,10 @@ export class LoginComponent implements OnInit {
       }
    })
    .catch(error=>{
-     this.flashMessage.show(error.message,{cssClass:'alert-danger',timeout:10000});
+     this.flashMessage.show("Il n'y a pas d'enregistrement d'utilisateur correspondant à cet identifiant.",{cssClass:'alert-danger',timeout:10000});
+     console.log(error.message);
      this.route.navigate(['login']);
+
    })
     
   }
@@ -54,7 +57,7 @@ export class LoginComponent implements OnInit {
        }
     })
     .catch(error=>{
-      this.flashMessage.show("L'adresse email n'existe pas dans notre base,ou l'adresse à été supprimé !!!",{cssClass:'alert-danger',timeout:10000});
+      this.flashMessage.show("Il n'y a pas d'enregistrement d'utilisateur correspondant à cet identifiant.",{cssClass:'alert-danger',timeout:10000});
       console.log(error.message);
       this.route.navigate(['login']);
     })

@@ -4,24 +4,41 @@
             <div class="card-body">
                 <h1 class="text-center">
                     <span class="text-primary">
-                        
+
                         <i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp; S'inscrire
                     </span>Client
                 </h1>
                 <form #formLogin="ngForm" (ngSubmit)="onRegister()">
                     <div class="form-group">
-                      <label for="email">Login/Email</label>
-                      <input type="text" name="email" [(ngModel)]="email" id="email" class="form-control" placeholder="vote email" >
+                        <label for="email">Login/Email</label>
+                        <input type="text" name="email"
+                            pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required
+                            #email="ngModel" [(ngModel)]="emailModule" id="email" class="form-control"
+                            placeholder="vote email">
+                        <div class="alert-danger" *ngIf="!email.valid && email.touched">
+                            <div *ngIf="email.errors.required">L'adresse email est obligatorie.</div>
+                            <div *ngIf="email.errors.pattern">L'adresse email n'est pas valide.</div>
+                        </div>
                     </div>
                     <div class="form-group">
-                       <label for="password">Password</label>
-                       <input type="password" name="password" [(ngModel)]="password" id="password" class="form-control" placeholder="mot de passe..." >
-                     </div>
-                     <div class="form-group">
-                       <button type="submit" class="btn btn-lg btn-block btn-dark">
-                           <i class="fa fa-database" aria-hidden="true"></i>&nbsp;&nbsp;S'inscrire
-                       </button>
-                     </div>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" [(ngModel)]="passwordModule" id="password" required
+                            class="form-control" placeholder="mot de passe..." #password="ngModel" minlength="8"
+                            pattern="^[a-zA-z0-9]*$">
+                        <div class="alert-danger" *ngIf="!password.valid && password.touched">
+                            <div *ngIf="password.errors.required">Ce champs est obligatoire</div>
+                            <div *ngIf="password.errors.pattern">Mot de passe doit être alphanumérique.</div>
+                            <div *ngIf="password.errors.minlength">Mot de passe doit comprendre
+                                {{password.errors.minlength.requiredLength}} |
+                                {{password.errors.minlength.actualLength}}</div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="formLogin.form.invalid" type="submit" class="btn btn-lg btn-block btn-dark">
+                            <i class="fa fa-database" aria-hidden="true"></i>&nbsp;&nbsp;S'inscrire
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -29,4 +46,3 @@
     </div>
 
 </div>>
-

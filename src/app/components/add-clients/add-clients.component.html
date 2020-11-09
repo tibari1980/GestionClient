@@ -138,7 +138,7 @@
                      [(ngModel)]="clientModule.Balance"
                      #Balance="ngModel"
                      required
-                     pattern="^[0-9]{1,4}$">
+                     pattern="^[0-9]{1,6}$">
                      <div class="alert alert-danger" *ngIf="!Balance.valid && Balance.touched">
                        <div *ngIf="Balance.errors.required">Ce champs est obligatoire</div>
                        <div *ngIf="Balance.errors.pattern">Ce champs doit être numérique et ne dépasse passe 5 chiffres.</div>

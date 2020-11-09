@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  password:string;
-  email:string;
+  passwordModule:string;
+  emailModule:string;
   constructor(private authService:AuthService,private route:Router,private flashMessage:FlashMessagesService) {
 
    }
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
 
   onRegister(){
-   this.authService.createUser(this.email,this.password)
+   this.authService.createUser(this.emailModule,this.passwordModule)
    .then((register)=>{
      if(register){
          this.flashMessage.show('Le compte à été créé avec success!',{cssClass:'alert-success',timeout:5000});
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
      }
    })
    .catch((error)=>{
-       this.flashMessage.show("l'adresse email est déjà utilisée",{cssClass:'alert-danger',timeout:5000});
+       this.flashMessage.show("Attention : L'adresse email est déjà utilisée",{cssClass:'alert-danger',timeout:5000});
        this.route.navigate(['/register']);
        console.log(error.message);
    })

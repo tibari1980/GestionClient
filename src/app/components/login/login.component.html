@@ -10,14 +10,41 @@
                  <form #formLogin="ngForm" (ngSubmit)="onSeConnecte()">
                      <div class="form-group">
                        <label for="email">Login/Email</label>
-                       <input type="text" name="email" [(ngModel)]="email" id="email" class="form-control" placeholder="vote email" >
+                       <input type="text" 
+                               name="email" 
+                               [(ngModel)]="emailModule"
+                               required
+                               #email="ngModel"
+                               pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" 
+                               id="email" class="form-control" 
+                               placeholder="vote email" >
+                               <div class="alert-danger" *ngIf="!email.valid && email.touched">
+                                   <div *ngIf="email.errors.required">L'adresse email est obligatorie.</div>
+                                   <div *ngIf="email.errors.pattern">L'adresse email n'est pas valide.</div>
+
+                               </div>
                      </div>
                      <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" [(ngModel)]="password" id="password" class="form-control" placeholder="mot de passe..." >
+                        <input type="password" 
+                               name="password" 
+                               [(ngModel)]="passwordModule" 
+                                id="password"
+                                required 
+                                class="form-control" 
+                                placeholder="mot de passe..." 
+                                #password="ngModel"
+                                minlength="8"
+                                pattern="^[a-zA-z0-9]*$">
+                                <div class="alert-danger" *ngIf="!password.valid && password.touched">
+                                    <div *ngIf="password.errors.required">Ce champs est obligatoire</div>
+                                    <div *ngIf="password.errors.pattern">Mot de passe doit être alphanumérique.</div>
+                                    <div *ngIf="password.errors.minlength">Mot de passe doit comprendre {{password.errors.minlength.requiredLength}} | {{password.errors.minlength.actualLength}}</div>
+
+                                </div>
                       </div>
                       <div class="form-group">
-                        <button type="submit" class="btn btn-block btn-dark">
+                        <button type="submit" [disabled]="formLogin.form.invalid" class="btn btn-block btn-dark">
                             <i class="fa fa-database" aria-hidden="true"></i>&nbsp;&nbsp;S'authentifié
                         </button>
                         <button (click)="OnseConnecteAvecCompteGoogle()" class="btn btn-block btn-danger">
