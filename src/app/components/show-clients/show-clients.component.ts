@@ -87,8 +87,9 @@ export class ShowClientsComponent implements OnInit {
         })
       }
     })
+  }
 
-
-
+  onEditClient(id:string){
+    return this.router.navigate(['/client/edit/'+this.client.id]);
   }
 }

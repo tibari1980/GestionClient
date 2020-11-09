@@ -27,7 +27,7 @@
             </button>
             &nbsp;&nbsp;
             <button class="btn btn-primary btn-sm" 
-                [routerLink]="['/client/edit', client.id]">
+                (click)="onEditClient(client.id)">
                 <i class="fa fa-pencil"></i>Modifié
             </button>
         </div>
@@ -37,7 +37,7 @@
     <div class="col-sm-8" *ngIf="client">
         <div class="card">
             <img class="card-img-top" src="holder.js/100x180/" alt="">
-            <h4>Identifiant :{{client.id}}</h4>
+            <h4>Identifiant : <strong>{{client.id}}</strong></h4>
             <div class="card-body">
                 <h4 class="card-title">M/MLLE  : {{client.firstName | uppercase}} {{client.lastName | uppercase}}</h4>
                  <ul class="list-group">
