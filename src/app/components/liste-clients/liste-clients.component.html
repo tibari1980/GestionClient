@@ -56,7 +56,7 @@
         <tbody>
             <tr *ngFor="let client of SearchClient" (dblclick)="onDeleteClient(client)">
                 <td>
-                    <a routerLink="client/edit/{{client.id}}">
+                    <a routerLink="/client/edit/{{client.id}}">
                         <i class="fa fa-edit styleFa"></i>
                     </a>
                 </td>
