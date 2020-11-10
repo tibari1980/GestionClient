@@ -27,12 +27,13 @@
             <h4 class="card-title"><i class="fa fa-user-circle" aria-hidden="true"></i>Nouveau client : </h4>
           <form  #formClient="ngForm" (ngSubmit)="onSaveClient()">
             <div class="form-group">
-              <label for="firstName">Nom :</label>
+              <label for="firstName">Nom <span class="mandatory">*</span></label>
               <input type="text" 
-                     class="form-control" 
+                     class="form-control"  
                      #firstName="ngModel"
                      name="firstName" 
-                     id="firstName" 
+                     id="firstName"
+                     [ngClass]="{'is-valid': firstName.valid,'is-invalid':!firstName.valid && firstName.touched}"
                      placeholder="votre nom"
                      pattern="^[a-zA-Z]*$"
                      minlength="4"
@@ -46,11 +47,13 @@
                          </div>
             </div>
             <div class="form-group">
-              <label for="lastName">Prénom :</label>
+              <label for="lastName">Prénom <span class="mandatory">*</span></label>
               <input type="text" 
                      class="form-control" 
                      name="lastName"
                      required
+                     [ngClass]="{'is-valid':lastName.valid,'is-invalid':lastName.invalid && lastName.touched}"
+                     
                      pattern="^[a-zA-Z]*$"
                      minlength="4"
                      maxlength="30"
@@ -66,7 +69,7 @@
                      </div>
             </div>
             <div class="form-group">
-              <label for="adresse">Adresse :</label>
+              <label for="adresse">Adresse <span class="mandatory">*</span></label>
               <input type="text" 
                      class="form-control" 
                      name="adresse" 
@@ -75,6 +78,7 @@
                      required
                      minlength="10"
                      maxlength="200"
+                     [ngClass]="{'is-valid': adresse.valid,'is-invalid':!adresse.valid && adresse.touched}"
                      pattern="^[a-zA-Z0-9_ ]*$"
                      [(ngModel)]="clientModule.adresse">
                      <div class="alert aler-danger" *ngIf="!adresse.valid && adresse.touched">
@@ -86,11 +90,12 @@
                      
             </div>
             <div class="form-group">
-              <label for="email">Email :</label>
+              <label for="email">Email<span class="mandatory">*</span></label>
               <input type="email" 
                      class="form-control" 
                      name="email"
                      #email="ngModel" 
+                     [ngClass]="{'is-valid':email.valid,'is-invalid':!email.valid && email.touched}"
                      id="email" placeholder="votre email"
                      pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                      [(ngModel)]="clientModule.email"
@@ -101,11 +106,12 @@
                      </div>
             </div>
             <div class="form-group">
-              <label for="phone">Téléphone :</label>
+              <label for="phone">Téléphone <span class="mandatory">*</span></label>
               <input type="tel" 
                      class="form-control" 
                      name="phone" 
                      id="phone" 
+                     [ngClass]="{'is-valid':phone.valid,'is-invalid':!phone.valid && phone.touched}"
                      placeholder="votre télphone ex : 0625491640"
                      [(ngModel)]="clientModule.phone"
                      #phone="ngModel"
@@ -117,20 +123,21 @@
                      </div>
             </div>
             <div class="form-group">
-              <label for="dateOfBird">Date de Naissance :</label>
+              <label for="dateOfBird">Date de Naissance <span class="mandatory"> *</span></label>
               <input type="date" 
                      class="form-control" 
                      name="dateOfBird" id="dateOfBird"  
                      placeholder="date de naissance"
                      #dateOfBird="ngModel"
                      required
+                     [ngClass]="{'is-valid':dateOfBird.valid,'is-invalid':!dateOfBird.valid && dateOfBird.touched}"
                      [(ngModel)]="clientModule.dateOfBird">
                      <div class="alert alert-danger" *ngIf="!dateOfBird.valid && dateOfBird.touched">
                        <div class="alert alert-danger" *ngIf="dateOfBird.errors.required">Ce champs est obligatoire.</div>
                      </div>
             </div>
             <div class="form-group">
-              <label for="Balance">Balance :</label>
+              <label for="Balance">Balance <span class="mandatory"> *</span></label>
               <input type="number" class="form-control" 
                      name="Balance" id="Balance" 
                      placeholder="montant...."
@@ -138,6 +145,7 @@
                      [(ngModel)]="clientModule.Balance"
                      #Balance="ngModel"
                      required
+                     [ngClass]="{'is-valid':Balance.valid,'is-invalid':!Balance.valid && Balance.touched}"
                      pattern="^[0-9]{1,6}$">
                      <div class="alert alert-danger" *ngIf="!Balance.valid && Balance.touched">
                        <div *ngIf="Balance.errors.required">Ce champs est obligatoire</div>
