@@ -1,14 +1,11 @@
- //"start": "ng serve",
 {
   "name": "gestion-client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "postinstall": "ng build --prod",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -16,10 +13,8 @@
   "dependencies": {
     "@angular/animations": "~10.2.0",
     "@angular/cdk": "^10.2.7",
-    "@angular/cli": "~10.2.0",
     "@angular/common": "~10.2.0",
     "@angular/compiler": "~10.2.0",
-    "@angular/compiler-cli": "~10.2.0",
     "@angular/core": "~10.2.0",
     "@angular/fire": "^6.0.4",
     "@angular/forms": "~10.2.0",
@@ -31,7 +26,6 @@
     "angular2-flash-messages": "^3.0.1",
     "angularfire2": "^5.4.2",
     "bootstrap": "^4.5.3",
-    "express": "^4.17.1",
     "firebase": "^7.24.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
@@ -40,11 +34,12 @@
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.9.0",
     "tslib": "^2.0.0",
-    "typescript": "~4.0.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1002.0",
+    "@angular/cli": "~10.2.0",
+    "@angular/compiler-cli": "~10.2.0",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -59,6 +54,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "tslint": "~6.1.0"
+    "tslint": "~6.1.0",
+    "typescript": "~4.0.2"
   }
 }
