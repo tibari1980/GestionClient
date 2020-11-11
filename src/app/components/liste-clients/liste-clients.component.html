@@ -22,7 +22,7 @@
  </div>
 <div *ngIf="clients?.length>0" >
 <div class="row">
-    <div class="offset-7 col-3">
+    <div class="offset-7  col">
         <h4 class="text-right">Total:&nbsp;&nbsp; 
         <ng-container *ngIf="totalBalance>0; then thenTemplate; else elseTemplate"></ng-container>
         <ng-template #thenTemplate>
@@ -35,49 +35,55 @@
     </div>
 
 </div>
-<table class="table table-striped table-dark table-responsive spacerRow">
-    <thead class="thead-inverse">
-        <tr>
-            <th>
-                 <a [routerLink]="[ '/client/add']">
-                    <i class="fa fa-plus-circle styleFa"  aria-hidden="true"></i>
-                </a>
-            </th>
-            <th>LastName</th>
-            <th>FirstName</th>
-            <th>Adresse</th>
-            <th>Data of Birth</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Balance</th>
-             <th></th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let client of SearchClient" (dblclick)="onDeleteClient(client)">
-                <td>
-                    <a routerLink="/client/edit/{{client.id}}">
-                        <i class="fa fa-edit styleFa"></i>
-                    </a>
-                </td>
-                <td scope="row">{{client.lastName}}</td>
-                <td>{{client.firstName}}</td>
-                <td>{{client.adresse}}</td>
-                <td>{{client.dateOfBird}}</td>
-                <td>{{client.phone}}</td>
-                <td>{{client.email}}</td>
-                <td>{{client.Balance | currency:'EUR':'symbol'}}</td>
-                <td>
-                    <a routerLink="/client/show/{{client.id}}" >
-                      <i class="fa fa-eye styleFa" aria-hidden="true"></i>
-                    </a>
-                </td>
-                <td>
-                    <a (click)="onDeleteClient(client)" >
-                        <i class="fa fa-trash styleFa" aria-hidden="true"></i>
-                      </a>
-                </td>          
-            </tr>
-        </tbody>
-</table>
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12">
+        <table class="table table-striped table-dark table-responsive spacerRow">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>
+                         <a [routerLink]="[ '/client/add']">
+                            <i class="fa fa-plus-circle styleFa"  aria-hidden="true"></i>
+                        </a>
+                    </th>
+                    <th>LastName</th>
+                    <th>FirstName</th>
+                    <th>Adresse</th>
+                    <th>Data of Birth</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Balance</th>
+                     <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let client of SearchClient" (dblclick)="onDeleteClient(client)">
+                        <td>
+                            <a routerLink="/client/edit/{{client.id}}">
+                                <i class="fa fa-edit styleFa"></i>
+                            </a>
+                        </td>
+                        <td scope="row">{{client.lastName}}</td>
+                        <td>{{client.firstName}}</td>
+                        <td>{{client.adresse}}</td>
+                        <td>{{client.dateOfBird}}</td>
+                        <td>{{client.phone}}</td>
+                        <td>{{client.email}}</td>
+                        <td>{{client.Balance | currency:'EUR':'symbol'}}</td>
+                        <td>
+                            <a routerLink="/client/show/{{client.id}}" >
+                              <i class="fa fa-eye styleFa" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a (click)="onDeleteClient(client)" >
+                                <i class="fa fa-trash styleFa" aria-hidden="true"></i>
+                              </a>
+                        </td>          
+                    </tr>
+                </tbody>
+        </table>
+        
+    </div>
+
+</div>
 </div>

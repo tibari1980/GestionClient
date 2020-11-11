@@ -16,3 +16,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .form-control.ng-valid.ng-untouched{
     border: 2px solid green;
 }
+
+.mandatory{
+    color:red;
+}
